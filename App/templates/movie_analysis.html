@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>CinemAI Insights - A One Stop Solution (Movie Analysis)</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/moviePage.css') }}">
+    <script src="{{ url_for('static', filename='js/analysis_page.js') }}" defer></script>
+</head>
+
+<body>
+    <main></main>
+    <h1 id = "main-heading">CinemAI Insights - A One Stop Solution</h1>
+    <br>
+        <!-- Navigation bar -->
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="#">Movie Rating Prediction</a></li>
+                <li><a href="#">Genre Classification</a></li>
+                <li><a href="#">Age Restriction Prediction</a></li>
+                <li><a href="#">Movie Script Analysis</a></li>
+            </ul>
+        </nav>
+    
+
+    <div class="split-page">
+
+        <!-- METADATA / SIDEBAR  -->
+        <div class="sidebar">
+            <h1 id ='blink-meta'>Metadata - PlotPerspective</h1>
+            <br>
+
+            <div id="button-container" style="float: center;">
+                <button id="script-button" onclick="toggleMode()">SCRIPT</button>
+            </div>
+            <div class="meta">
+            <table>
+                <tr style="float: center; align-items: center;" ><img  src="{{ url_for('static', filename=data['src']) }}" alt="{{ data['title'] }} Poster"></tr>
+                <tr><td>Movie Title:</td><td>{{ data['title'] }}</td></tr>
+                {% for key, value in data.items() %}
+                    {% if value is defined and key not in ['imdbid','title','Akas','src'] %}
+                        {% if key == 'age restrict' %}
+                            <tr>
+                                <td><b>{{ key|capitalize }}:</b></td>
+                                <td>
+                                    {% for age_value in value.split(', ') %}
+                                        {{age_value }}<br>
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                            {% elif key == 'awards' %}
+                            <tr>
+                                <td class="key"><b>{{ key|capitalize }}:</b></td>
+                                <td>
+                                    {% for award_value in value.split(', ') %}
+                                        {{ award_value }}<br>
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td><b>{{ key|capitalize }}:</b></td>
+                                <td>{{ value }}</td>
+                            </tr>
+                        {% endif %}
+                        <tr></tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+        </div>
+
+        
+        {% if script_content %}
+        <div id="script-container" style="display: none;">
+            <br>
+            <pre>{{ script_content | safe }}</pre>
+        </div>
+        {% endif %}
+
+        </div>
+
+        <div class="separator"></div>
+
+        <!-- Main Analysis -->
+        <div class="content">
+            <h1 id ='blink-analysis'>Analysis - PlotPulse</h1>
+            <br>
+
+            <hr>
+            <div id="skills-container">
+                    <!-- Topic Modelling Section -->
+                    <br>
+                    <h2 style="text-align: center;">Unveiling Movie Themes with Topic Modelling</h2>
+                    <br>
+                    <p>
+                        Dive into the heart of {{data['title']}}'s movie script with Topic Modelling, a powerful tool that uncovers underlying themes within movie scripts.
+                    </p>
+                    <ul>
+                        <li>Identifying and extract key themes embedded in the movie script.</li>
+                        <li>Gaining insights into recurring topics and patterns across different scenes.</li>
+                    </ul>
+                    <br>
+                    {% include "graphs/topic_cloud_1.html" %}
+                    {% include "graphs/topic_cloud_2.html" %}
+                    {% include "graphs/topic_cloud_3.html" %}
+
+                    <hr>
+                    <br>
+                    <!-- Vader Scene-wise Sentiment Section -->
+                    <h2 style="text-align: center;">Feel the Vibes: Vader Scene-wise Sentiment</h2>
+                    <br>
+                    <p>
+                        Ever wondered about the emotional journey of a movie? Vader Scene-wise Sentiment does just that. 
+                        It Analyses the emotional tone of the script on a scene-by-scene basis using sentiment analysis
+                    </p>
+                    {% include "graphs/scenewise_sentiment.html" %}
+                    
+                    <hr>
+                    <br>
+                    <!-- Name Entity Recognition Section -->
+                    <h2 style="text-align: center;">Spotlight on Characters and Locations with NER</h2>
+                    <br>
+                    <p>
+                        Name Entity Recognition (NER) shines a light on characters, locations, and more. It helps with 
+                        identifying and classifying entities such as characters, locations, and organizations within the script.
+                    </p>
+                    <br>
+                    {% include "graphs/ner1.html" %}
+                    {% include "graphs/ner2.html" %}
+                    
+                    <br>
+                    <hr>
+                    <!-- Scenes per Character Section -->
+                    <br>
+                    <h2 style="text-align: center;">A Character's Stage: Scenes per Character</h2>
+                    <br>
+                    <p>
+                        Explore the journey of each character through the movie, by seeing how frequent does a character appear in {{data['title']}}.
+                    </p>
+                    <br>
+                    {% include "graphs/scenes_per_character.html" %}
+
+                    <hr>
+                    <br>
+                    <!-- Dialogue per Character Section -->
+                    <h2 style="text-align: center;">Words That Matter: Dialogue per Character</h2>
+                    <br>
+                    <p>
+                        Delve into the significance of character dialogues, by seeing how frequent does a character speak up in {{data['title']}}.
+                    </p>
+                    {% include "graphs/dlg_per_character.html" %}
+
+                    <hr>
+                    <br>
+                    <!-- Scene-wise NRC Lexicon Emotion Analysis Section -->
+                    <h2 style="text-align: center;">Emotion Unveiled: Scene-wise NRC Lexicon Analysis</h2>
+                    <br>
+                    <p>
+
+                        Understand the emotional landscape of the script with NRC Lexicon Analysis.
+                    </p>
+                    {% include "graphs/ncr_emotion_plot.html" %}
+
+                    <hr>
+                    <br>
+                    <!-- POS Tags Section -->
+                    <h2 style="text-align: center;">Decoding Language: POS Tags</h2>
+                    <br>
+                    <p>
+                        POS Tags help decode the language used in the script.
+                    </p>
+                    {% include "graphs/pos.html" %}
+                    <br>
+                    <hr>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+</body>
+
+</html>

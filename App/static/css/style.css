@@ -1,0 +1,481 @@
+html {
+    --textsize: 16px;
+    --textcolor: #eeefee;
+    --backcolor: #0e0e0f;
+  
+    --margin: calc(0.8em + 1vw);
+    --thumbsize: 156px; /* size M */
+    --slide-transition: auto; /* smooth or auto */
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html,
+  body {
+    height: 100%;
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    color: var(--textcolor);
+    background: var(--backcolor);
+    padding: var(--margin) var(--margin) 0;
+    overscroll-behavior: contain;
+    -webkit-tap-highlight-color: transparent;
+    font: var(--textsize) / 1.4 -apple-system, BlinkMacSystemFont, 'Segoe UI', Noto, Roboto, Oxygen-Sans, Cantarell, 'Helvetica Neue', Arial, sans-serif;
+    --textcolor: #eeefee;
+  }
+  
+  footer {
+    position: sticky;
+    top: 100vh;
+    padding: calc(var(--margin) * 2.5) 0 var(--margin) 0;
+    font-size: 0.85em;
+    opacity: 0.3;
+  }
+  
+  h1 {
+    font-size: 2em;
+    text-align: center;
+  }
+  
+  h1 span {
+    font-weight: normal;
+    text-align: center;
+    display: inline-block;
+  }
+  
+  a {
+    color: currentColor;
+  }
+  
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    user-select: none;
+  }
+  
+  /* -- Images grid -- */
+  
+  .grid {
+    clear: both;
+    display: grid;
+    grid-auto-flow: dense;
+    grid-template-columns: repeat(auto-fill, minmax(var(--thumbsize), 1fr));
+    grid-gap: calc(var(--margin) * 1.33) var(--margin);
+    padding-top: calc(var(--margin) * 2);
+  }
+  
+  .grid figure {  
+    position: relative;
+  }
+  
+  .grid a {
+    display: block;
+    position: relative;
+    scroll-margin: 20vh 0;
+  }
+  
+  .grid a img {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  
+  .grid a::before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+  }
+  
+  .grid figcaption {
+    font-size: 0.85em;
+    margin-top: calc(var(--margin) / 2);
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    opacity: 0.4;
+  }
+  
+  .grid figure a:focus {
+    outline: 0 none;
+    border-radius: 1px;
+    box-shadow: 0 0 0 4px;
+    background: currentColor;
+  }
+  
+  .grid figure a:target {
+    outline: 1px solid;
+    border-radius: 4px;
+  }
+  
+  .grid figure a:hover + figcaption,
+  .grid figure a:focus + figcaption {
+    opacity: 1;
+  }
+  
+  /* Thumbnails S M L XL */
+  
+  input {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    direction: ltr; /* Change to left-to-right */
+}
+
+  
+  label {
+    user-select: none;
+    cursor: pointer;
+    opacity: 0.5;
+    padding: 0.05em 0.45em;
+    margin-top: -0.05em;
+    float: right;
+    display: none;
+  }
+  
+  label:hover,
+  input:focus + label {
+    opacity: 1;
+  }
+  
+  input:focus + label,
+  input:checked + label:hover {
+    outline: 1px solid;
+    border-radius: 1px;
+  }
+  
+  input:checked + label {
+    opacity: 1;
+    font-weight: bold;
+  }
+  
+  /* Show only on bigger screens */
+  @media (min-width: 820px) {
+    label {
+      display: inline-block;
+    }
+    h1 {
+      display: inline-block;
+      text-align: center;
+      width: calc(100%);
+    }
+  }
+  
+  input#small:checked ~ .grid {
+    grid-template-columns: repeat(auto-fill, minmax(calc(var(--thumbsize) / 2), 1fr));
+    grid-gap: var(--margin);
+  }
+  
+  input#large:checked ~ .grid {
+    grid-template-columns: repeat(auto-fill, minmax(calc(var(--thumbsize) * 1.5), 1fr));
+    grid-gap: calc(var(--margin) * 1.5);
+  }
+  
+  input#x-large:checked ~ .grid {
+    grid-template-columns: repeat(auto-fill, minmax(calc(var(--thumbsize) * 2), 1fr));
+    grid-gap: calc(var(--margin) * 1.5);
+  }
+  
+  /* -- Lightbox -- */
+  
+  .lightbox {
+    display:none;
+  }
+  
+  .fixed .lightbox {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior: contain;
+    z-index: 5;
+  }
+  
+  .lightbox:hover {
+    scroll-behavior: var(--slide-transition);
+  }
+  
+  .lightbox figure {
+    background: var(--backcolor);
+    position: relative;
+    scroll-snap-align: center;
+    flex: none;
+    display: flex;
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* fix for #permalinks to work…
+  
+  .lightbox:not(:focus-within) figure:target {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+  }
+  */
+  
+  .lightbox figure:focus {
+    outline: none;
+  }
+  
+  .lightbox figure a.image {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    cursor: default;
+  }
+  
+  .lightbox figure a.image img {
+    width: auto;
+    height: auto;
+    max-width: 100vw;
+    max-height: 100vh;
+    z-index: 2;
+    opacity: 0;
+  }
+  
+  .lightbox:focus-within figure a.image img,
+  .lightbox:not(:focus-within) figure:target a.image img {
+    opacity: 1;
+    transition: 0.35s opacity ease-out;
+  }
+  
+  /* -- Prev / Next -- */
+  
+  .lightbox figure a.image::before,
+  .lightbox figure a.image::after {
+    cursor: pointer;
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 33vw;
+    z-index: 3;
+  }
+  
+  .lightbox figure a.image::before {
+    left: -33vw;
+  }
+  
+  .lightbox figure a.image::after {
+    right: -33vw;
+  }
+  
+  .lightbox figure:first-of-type a.image::before,
+  .lightbox figure:last-of-type a.image::after {
+    display: none;
+  }
+  
+  /* -- Counter -- */
+  
+  .lightbox {
+    counter-reset: currentStep 0 remainder 0 totalStep 0;
+  }
+  
+  .lightbox figure {
+    counter-increment: totalStep;
+  }
+  
+  .lightbox figure::before {
+    content: "";
+    counter-increment: currentStep;
+  }
+  
+  .lightbox figure:focus ~ figure::before {
+    counter-increment: remainder;
+  }
+  
+  .counter {
+    font-variant-numeric: tabular-nums;
+    opacity: 0.3;
+    text-shadow: 1px 1px 2px var(--backcolor);
+    z-index: 2;
+    position: fixed;
+    bottom: var(--margin);
+    right: var(--margin);
+  }
+  
+  .lightbox:focus-within .counter::before {
+    content: counter(currentStep) "/" counter(totalStep);
+  }
+  
+  /* -- Close button -- */
+  
+  a.close {
+    position: absolute;
+    display: block;
+    top: 0;
+    right: 0;
+    z-index: 20;
+    color: transparent;
+    user-select: none;
+    width: 10vmax;
+    height: 10vmax;
+  }
+  
+  a.close:focus-visible {
+    outline: 0;
+  }
+  
+  a.close:hover::before,
+  a.close:hover::after,
+  .lightbox:focus-within::before,
+  .lightbox:focus-within::after {
+    top: 0;
+    right: 0;
+    padding: calc(var(--margin) / 4) calc(var(--margin) / 2) 10vmax 10vmax;
+    display: block;
+    line-height: 1;
+    content: "\00d7";
+    font-size: 2.4em;
+    font-weight: 200;
+    position: fixed;
+    pointer-events: none;
+  }
+  
+  .lightbox:focus-within::before,
+  .lightbox:focus-within::after {
+    z-index: 2;
+    opacity:.3;
+  }
+  
+  @media (hover:hover) and (pointer:fine) { 
+    a.close:hover::before,
+    a.close:hover::after {
+      color: var(--textcolor);
+    }
+  }
+  
+  /* -- Loading spinner -- */
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .lightbox figure::before {
+    content: "";
+    height: 1.5em;
+    width: 1.5em;
+    animation: spin 0.8s infinite linear;
+    border: 1px solid;
+    border-right-color: transparent;
+    border-radius: 50%;
+    display: block;
+    position: absolute;
+    transform: translateX(-50%);
+    opacity: 0.25;
+  }
+  
+/* -- Navigation Bar -- */
+nav {
+    background: var(--backcolor);
+    padding: 1em;
+    float: center;
+    display: inline;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+    padding: 0;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--textcolor);
+    font-weight: bold;
+    padding: 0.5em;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+nav a:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.blinking-cursor {
+    margin-left: 5px;
+    background-color: #fff;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 50% {
+        opacity: 1;
+    }
+    50.1%, 100% {
+        opacity: 0;
+    }}
+
+
+/* Search bar */
+
+/* Search bar */
+.search-bar {
+    display: flex;
+    margin-top: 1em;
+
+}
+
+#movie-search {
+    flex-grow: 2;
+    padding: 0.7em;
+    font: var(--textsize) / 1.4 -apple-system, BlinkMacSystemFont, 'Segoe UI', Noto, Roboto, Oxygen-Sans, Cantarell, 'Helvetica Neue', Arial, sans-serif;
+    --textcolor: #000000;
+    color: var(--textcolor);
+    background-color: rgb(255, 255, 255); /* Darker color for the input background */
+    border: 1.5px solid var(--backcolor);
+    height: 2em;
+    border-radius: 7px;
+    text-align: center;
+}
+
+#movie-search::placeholder {
+    color: var(--textcolor);
+    opacity: 0.8;
+}
+
+button {
+    padding: 0.5em 1em;
+    background-color: var(--backcolor);
+    color: var(--textcolor);
+    font-family: 'Your Chosen Font', sans-serif; /* Use the same font as the rest of the HTML */
+    border: 1px solid var(--textcolor);
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 0.5em;
+}
+
+button:hover {
+    background-color: var(--textcolor);
+    color: var(--backcolor);
+}
+

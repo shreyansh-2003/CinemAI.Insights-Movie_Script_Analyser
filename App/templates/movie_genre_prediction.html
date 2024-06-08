@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>CinemAI Insights - A One Stop Solution (Movie Genre Prediction) </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+</head>
+<style>
+
+main {
+    text-align: center;
+}
+
+#prediction_vals {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center both horizontally */
+    margin-bottom: 20px;
+}
+
+label {
+    margin-bottom: 10px;
+}
+
+textarea {
+    width: 80%;
+    font-size: 2em; /* Adjust the font size as needed */
+}
+
+button {
+    padding: 10px 20px;
+    width: 15em;
+    font-size: 1.4em;
+    margin-top: 10px;
+}
+
+#predictionResult {
+    margin-top: 20px;
+    font-size: 2em; /* Increased font size to 2em */
+}
+
+/* Added styling for different rating colors */
+.red {
+    color: red;
+}
+
+.orange {
+    color: orange;
+}
+
+.light-green {
+    color: lightgreen;
+}
+
+.dark-green {
+    color: darkgreen;
+}
+
+</style>
+<body>
+    <!-- Main content of the page -->
+    <!-- Page heading -->
+    <main>
+        <h1 id="main-heading">CinemAI Insights - A One Stop Solution</h1>
+        <br>
+        <!-- Navigation bar -->
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('movie_rating_prediction') }}">Movie Rating Prediction</a></li>
+                <li><a href="{{ url_for('genre_prediction') }}">Genre Classification</a></li>
+                <li><a href="{{ url_for('age_restriction_prediction') }}">Age Restriction Prediction</a></li>
+                <li><a href="{{ url_for('index') }}">Movie Script Analysis</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <h1 style="padding: 1em;">BERTalizing Movie Scripts : Movie Genre Prediction</h1>
+
+        <!-- Movie Script Input -->
+        <div id="prediction_vals">
+            <label style="font-size: 1.6em;" for="movieScript">Enter Movie Script</label>
+            <textarea id="movieScript" rows="10" cols="50"></textarea>
+        </div>
+
+        <!-- Movie Script Input with Dropdown -->
+        <div id="prediction_vals">
+            <label style="font-size: 1.6em;" for="movieTitle">Select Movie Title</label>
+            <select style="font-size: 1.4em; width: 25em;" id="movieTitle" onchange="updateScriptContent()">
+                {% for title in movie_metadata['title'] %}
+                    <option value="{{ title }}">{{ title }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+
+        <!-- Predict Button -->
+        <div>
+            <button onclick="predictRating()">PREDICT</button>
+        </div>
+
+        <!-- Prediction Result -->
+        <div id="predictionResult"></div>
+    </main>
+
+    <script>
+        function updateScriptContent() {
+        var selectedTitle = document.getElementById("movieTitle").value;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/get_script_content", true);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var scriptContent = JSON.parse(xhr.responseText).script_content;
+                document.getElementById("movieScript").value = scriptContent;
+            }
+        };
+
+        var data = JSON.stringify({ "selected_title": selectedTitle });
+        xhr.send(data);
+    }
+        function predictRating() {
+            var movieScript = document.getElementById("movieScript").value;
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/predict_movie_genre", true);
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var rating = xhr.responseText; // No need to parseFloat
+                    var resultElement = document.getElementById("predictionResult");
+                    resultElement.innerHTML = "Predicted Movie Genre -> " + rating;
+                }
+            };
+
+            var data = JSON.stringify({ "movieScript": movieScript });
+            xhr.send(data);
+        }
+    </script>
+</body>
+</html>

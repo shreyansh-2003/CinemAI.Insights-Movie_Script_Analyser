@@ -1,0 +1,96 @@
+<!-- Declaring the document type and specifies the language -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags for character set and viewport settings -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    
+    <!-- Title of the entire web page -->
+    <title>CinemAI Insights - A One Stop Solution (Home Page) </title>
+    
+    <!-- Link to Google Fonts for Material Symbols Rounded -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
+    
+    <!-- Link to the external CSS file (style.css) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    
+    <!-- Link to the external JavaScript file (script.js) with the defer attribute -->
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+</head>
+<body>
+    <!-- Main content of the page -->
+    <!-- Page heading -->
+    <main>
+        <h1 id = "main-heading">CinemAI Insights - A One Stop Solution</h1>
+        <br>
+            <!-- Navigation bar -->
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('index') }}">Home</a></li>
+                    <li><a href="{{ url_for('movie_rating_prediction') }}">Movie Rating Prediction</a></li>
+                    <li><a href="{{ url_for('genre_prediction') }}">Genre Classification</a></li>
+                    <li><a href="{{ url_for('age_restriction_prediction') }}">Age Restriction Prediction</a></li>
+                    <li><a href="{{ url_for('index') }}">Movie Script Analysis</a></li>
+                </ul>
+            </nav>
+        
+        <div class="content-container">
+        <!-- Radio buttons for selecting image size -->
+        <input type="radio" name="size" id="x-large">
+        <label for="x-large">XL</label>
+        <input type="radio" name="size" id="large">
+        <label for="large">L</label>
+        <input checked type="radio" name="size" id="medium">
+        <label for="medium">M</label>
+        <input type="radio" name="size" id="small">
+        <label for="small">S</label>
+
+        <!-- Search bar -->
+        <div class="search-bar">
+            <input type="text" id="movie-search" placeholder="Search Movie Titles">
+            <button onclick="searchMovies()">Search</button>
+        </div>
+                    
+
+        <!-- Image grid container -->
+        <div class="grid">
+            <!-- Loopoing through each image in the image_data list -->
+            {% for image in image_data %}
+                <!-- Figure element for each image with a landscape class -->
+                <figure class="landscape">
+                    <!-- Anchor tag linking to the image with IMDb ID as href and IMDb ID with '-thumb' as id -->
+                    <a href="#{{ image['imdbid'] }}" id="{{ image['imdbid']|replace(".", "-thumb") }}">
+                        <!-- Image tag with lazy loading, width, height, source from the static folder, and alt text from image title -->
+                        <img class="open" loading="lazy" width="300" height="200" src="{{ url_for('static', filename=image['src']) }}" alt="{{ image['title'] }}">
+                    </a>
+                    <!-- Figcaption displaying the image title -->
+                    <figcaption>{{ image['title'] }}</figcaption>
+                    <figcaption>{{ image['year'] }}</figcaption>
+                </figure>
+            {% endfor %}
+        </div>
+
+        <!-- Lightbox container -->
+        <div class="lightbox">
+            <!-- Looping through each image in the image_data list for the lightbox -->
+            {% for image in image_data %}
+                <!-- Figure element for each image in the lightbox with tabindex, IMDb ID as id, and landscape class -->
+                <figure tabindex="0" id="{{ image['imdbid'] }}" class="landscape">
+                    <!-- Anchor tag linking to the image with IMDb ID as href and 'image' class -->
+                    <a tabindex="-1" href="#{{ image['imdbid'] }}" class="image">
+                        <!-- Image tag with lazy loading, width, height, source from the static folder, and alt text from image title -->
+                        <img loading="lazy" width="980" height="665" src="{{ url_for('static', filename=image['src']) }}" alt="{{ image['title'] }}">
+                    </a>
+                    <!-- Anchor tag linking to the thumbnail version of the image with IMDb ID as href and 'close' class -->
+                    <a tabindex="-1" href="#{{ image['imdbid']|replace(".", "-thumb") }}" class="close">Close</a>
+                </figure>
+            {% endfor %}
+            <!-- Counter element for tracking image index in the lightbox -->
+            <div class="counter"></div>
+        </div>
+    </div>
+    </main>
+
+</body>
+</html>
