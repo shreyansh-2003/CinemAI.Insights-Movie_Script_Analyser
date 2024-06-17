@@ -2,16 +2,16 @@
 
 As the fine-tuned and trained models are very large files and couldn't be uploaded using LFS Git, please find the models in the link attached below.
 
-*[Model Link](https://1drv.ms/f/s!AqM-iZWYLD9iiMEmcCXRkrZWoTSUtQ?e=J1UXvK)* <br>
+*[Model Repo Link](https://1drv.ms/f/s!AqM-iZWYLD9iiMEmcCXRkrZWoTSUtQ?e=J1UXvK)* <br>
 
 The files in the folder link above include:
 
-+ NRC Word-Emotion Association Lexicon:
-+ Pre-Trained  
++ *NRC Word-Emotion Association Lexicon*: Developed by the National Research Council Canada (NRC) under the supervision of Dr. Saif Mohammad, to help in understanding and analyzing the emotional content of textual data. These weights and rules are used in the application for analysing different emotions in movie scenes.
++ *Pre-Trained Folder*  
   + BERT Tokenizer: The BERT tokenizer is responsible for converting raw text into a format that the BERT model can process. It tokenizes the text into subwords or tokens.
   + BERT Model: BERT (Bidirectional Encoder Representations from Transformers) is a transformer-based model designed to understand the context of a word in search queries
   + BERT Sequence Model: This refers to using the BERT model for tasks involving sequences of text, such as sentence classification or token classification.
-+ bert_age_restrictions_model.h5
-+ bert_genre_model.h5
-+ bert_imdb_ratings_model.h5
++ *bert_age_restrictions_model.h5*
++ *bert_genre_model.h5*
++ *bert_imdb_ratings_model.h5*
 
