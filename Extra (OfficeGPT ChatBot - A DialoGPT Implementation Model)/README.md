@@ -1,6 +1,6 @@
 > # OfficeGPT - A DialoGPT implemention for the tv show 'The OFfice'
 
-![image](https://github.com/shreyansh-2003/CinemAI.Insights-Movie_Script_Analyser/assets/105413094/fb33ef7e-07c0-48db-80e3-987b60e20962)
+![image width="200" height="150"](https://github.com/shreyansh-2003/CinemAI.Insights-Movie_Script_Analyser/assets/105413094/fb33ef7e-07c0-48db-80e3-987b60e20962)
 
 
 This repository presents OfficeGPT, a fine-tuned implementation of DialoGPT specifically designed to generate dialogue in the style of characters from the popular American television series "The Office." By leveraging existing resources, the model has been trained to capture the unique speech patterns and conversational dynamics of the show's characters.
