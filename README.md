@@ -2,6 +2,17 @@
 
 CinemAI is a one stop solution solution created for movie buffs. The fullstack app has a movie scene-wise and character-wise analysis feature. It also has genre classification, movie, movie rating prediction and age restriction prediction based on a movie's script.
 
+**Running the CinemAI Insights Application**
+
+- Downloading additional (Large) Files
+  1. Download the *.H5 files*, *pre-trained tokenizers* and *NCR-lexion* into the ```Models Folder``` from the [**reostiory link**](https://1drv.ms/f/s!AqM-iZWYLD9iiMEmcCXRkrZWoTSUtQ?e=J1UXvK) givem in README.md of the Models folder.
+  2. Download the *Raw Folder*, *Processed Folder* and *cinema_mask.png* into the ```Data Folder``` from the [**reostiory link**](https://onedrive.live.com/?authkey=%21ADXkviDnwGJw8%2DE&id=623F2C9895893EA3%21139432&cid=623F2C9895893EA3) givem in README.md of the Data folder.
+  3. Extract the compressed file ```movie poster images.zip``` present in *App/static/images*
+
+- Install required libraries from requirements.txt (Command -> pip install -r requirements.txt)
+
+- Run app.py in ```App FOlder``` as a Flask server
+
 ---
 
 > ## Home Page
@@ -51,3 +62,4 @@ There are three distinct BERT (Bidirectional Encoder Representations from Transf
 <img width="1303" alt="Screenshot 2024-06-22 at 5 12 32 PM" src="https://github.com/shreyansh-2003/CinemAI.Insights-Movie_Script_Analyser/assets/105413094/d0a7ab51-bc99-4269-aa6d-7b8914827536">
 
 ---
+
