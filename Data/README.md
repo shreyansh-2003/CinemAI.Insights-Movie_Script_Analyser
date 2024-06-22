@@ -4,8 +4,6 @@ The data files necessary to run the project are over 1 GB in size and are not up
 
 [Data Repository Link](https://1drv.ms/f/s!AqM-iZWYLD9iiMEoNeS-IOfAYnDz4Q?e=PvThzu)
 
---
-
 > ## Folders Required
 
 ### Processed
@@ -20,8 +18,8 @@ The data files necessary to run the project are over 1 GB in size and are not up
 
 ### Additional File
 - `cinema_mask.png`
+![image](https://github.com/shreyansh-2003/CinemAI.Insights-Movie_Script_Analyser/assets/105413094/99d5e066-c3cf-48d9-bd06-c4829f48eceb)
 
---
 
 > ## Usage
 
@@ -30,5 +28,3 @@ The data files necessary to run the project are over 1 GB in size and are not up
 - The `Raw` folder is used as input for performing analysis when movie posters are clicked on the home page or selected from the dropdown.
 
 - The `cinema_mask.png` is used as a mask to generate the topic word clouds in the shape of theatrical masks while generating visualizations for the Plot Pulse - Movie Analysis Page.
-
---
