@@ -18,8 +18,6 @@ The data files necessary to run the project are over 1 GB in size and are not up
 
 ### Additional File
 - `cinema_mask.png`
-![image](https://github.com/shreyansh-2003/CinemAI.Insights-Movie_Script_Analyser/assets/105413094/99d5e066-c3cf-48d9-bd06-c4829f48eceb)
-
 
 > ## Usage
 
