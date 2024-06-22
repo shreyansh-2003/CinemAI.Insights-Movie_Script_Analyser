@@ -52,7 +52,7 @@ There are three distinct BERT (Bidirectional Encoder Representations from Transf
 
 ---
 
-> # Running the CinemAI Insights Application**
+> # Running the CinemAI Insights Application
 
 - Downloading additional (Large) Files
   1. Download the *.H5 files*, *pre-trained tokenizers* and *NCR-lexion* into the ```Models Folder``` from the [**reostiory link**](https://1drv.ms/f/s!AqM-iZWYLD9iiMEmcCXRkrZWoTSUtQ?e=J1UXvK) givem in README.md of the Models folder.
