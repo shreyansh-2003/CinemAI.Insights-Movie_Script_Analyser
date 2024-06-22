@@ -2,17 +2,6 @@
 
 CinemAI is a one stop solution solution created for movie buffs. The fullstack app has a movie scene-wise and character-wise analysis feature. It also has genre classification, movie, movie rating prediction and age restriction prediction based on a movie's script.
 
-**Running the CinemAI Insights Application**
-
-- Downloading additional (Large) Files
-  1. Download the *.H5 files*, *pre-trained tokenizers* and *NCR-lexion* into the ```Models Folder``` from the [**reostiory link**](https://1drv.ms/f/s!AqM-iZWYLD9iiMEmcCXRkrZWoTSUtQ?e=J1UXvK) givem in README.md of the Models folder.
-  2. Download the *Raw Folder*, *Processed Folder* and *cinema_mask.png* into the ```Data Folder``` from the [**reostiory link**](https://onedrive.live.com/?authkey=%21ADXkviDnwGJw8%2DE&id=623F2C9895893EA3%21139432&cid=623F2C9895893EA3) givem in README.md of the Data folder.
-  3. Extract the compressed file ```movie poster images.zip``` present in *App/static/images*
-
-- Install required libraries from requirements.txt (Command -> pip install -r requirements.txt)
-
-- Run app.py in ```App FOlder``` as a Flask server
-
 ---
 
 > ## Home Page
@@ -63,3 +52,31 @@ There are three distinct BERT (Bidirectional Encoder Representations from Transf
 
 ---
 
+> # Running the CinemAI Insights Application**
+
+- Downloading additional (Large) Files
+  1. Download the *.H5 files*, *pre-trained tokenizers* and *NCR-lexion* into the ```Models Folder``` from the [**reostiory link**](https://1drv.ms/f/s!AqM-iZWYLD9iiMEmcCXRkrZWoTSUtQ?e=J1UXvK) givem in README.md of the Models folder.
+  2. Download the *Raw Folder*, *Processed Folder* and *cinema_mask.png* into the ```Data Folder``` from the [**reostiory link**](https://onedrive.live.com/?authkey=%21ADXkviDnwGJw8%2DE&id=623F2C9895893EA3%21139432&cid=623F2C9895893EA3) givem in README.md of the Data folder.
+  3. Extract the compressed file ```movie poster images.zip``` present in *App/static/images*
+
+- Install required libraries from requirements.txt (Command -> pip install -r requirements.txt)
+
+- Run app.py in ```App Folder``` as a Flask server
+
+---
+
+> ## Notebooks
+
+---
+
+> ## Extra: OfficeGPT - A ChatBot based on the American TV Show "The Office
+
+This repository also presents OfficeGPT, a fine-tuned implementation of DialoGPT specifically designed to generate dialogue in the style of characters from the popular American television series "The Office." By leveraging existing resources, the model has been trained to capture the unique speech patterns and conversational dynamics of the show's characters.
+
+https://github.com/shreyansh-2003/CinemAI.Insights-Movie_Script_Analyser/assets/105413094/1faea283-d2bc-4601-b5e3-9a64ef377c62
+
+Training Methodology: OfficeGPT employs a fine-tuning approach based on the DialoGPT architecture. The model was iteratively trained on a dataset of approximately 45,000 dialogue lines spanning all nine seasons of "The Office." This dataset was carefully curated to represent the speech of various characters, ensuring a comprehensive understanding of the show's dialogue style.
+
+Implementation Details: A Jupyter Notebook (.ipynb) file, approximately 75 MB in size, is included in this repository. This notebook outlines the training process and is customized to work with a separate CSV script containing the dialogue dataset. The script can be downloaded from the following [public repository]([url](https://www.kaggle.com/datasets/nasirkhalid24/the-office-us-
+
+Model Size and Availability: Due to the significant size (over 9 GB) of the trained OfficeGPT model, it has not been included in this repository for practical reasons. However, the provided Jupyter Notebook offers a comprehensive guide for those interested in replicating the training process and generating their own "Office"-inspired dialogues.
