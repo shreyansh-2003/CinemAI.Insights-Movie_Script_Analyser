@@ -2,7 +2,7 @@
 
 As the fine-tuned and trained models are very large files and couldn't be uploaded using LFS Git, please find the models in the link attached below.
 
-*[Model Repo Link](https://1drv.ms/f/s!AqM-iZWYLD9iiMEmcCXRkrZWoTSUtQ?e=J1UXvK)* <br>
+**[Models Repository Link](https://1drv.ms/f/s!AqM-iZWYLD9iiMEmcCXRkrZWoTSUtQ?e=J1UXvK)** <br>
 
 The files in the folder link above include:
 
