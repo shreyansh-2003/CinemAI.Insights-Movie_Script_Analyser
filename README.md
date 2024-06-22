@@ -40,14 +40,14 @@ https://github.com/shreyansh-2003/CinemAI.Insights-Movie_Script_Analyser/assets/
 
 There are three distinct BERT (Bidirectional Encoder Representations from Transformers) based applications that have been fine-tuned to predict the genre (multi-label), age restriction (numeric value), and IMDb rating (numeric value) based on movie scripts. Users can either type in a script in an empty box or autofill the box with a selection of movies from the dropdown menu.
 
-> ### Genre Classification based on Movie Script
+> #### Genre Classification based on Movie Script
 
 <img width="1267" alt="Screenshot 2024-06-22 at 5 11 35 PM" src="https://github.com/shreyansh-2003/CinemAI.Insights-Movie_Script_Analyser/assets/105413094/f73c4944-3fb6-41c8-bf0c-1c31cecbd20a">
 
-> ### IMDB Rating Prediction based on Movie Script 
+> #### IMDB Rating Prediction based on Movie Script 
 <img width="1347" alt="Screenshot 2024-06-22 at 5 10 52 PM" src="https://github.com/shreyansh-2003/CinemAI.Insights-Movie_Script_Analyser/assets/105413094/27dc92b5-b704-4e18-8ac6-de985001366f">
 
-> ### Movie Age Restriction based on Movie Script
+> #### Movie Age Restriction based on Movie Script
 <img width="1303" alt="Screenshot 2024-06-22 at 5 12 32 PM" src="https://github.com/shreyansh-2003/CinemAI.Insights-Movie_Script_Analyser/assets/105413094/d0a7ab51-bc99-4269-aa6d-7b8914827536">
 
 ---
