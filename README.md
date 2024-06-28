@@ -63,6 +63,9 @@ There are three distinct BERT (Bidirectional Encoder Representations from Transf
 
 - Run app.py in ```App Folder``` as a Flask server
 
+
+**Note:** Kindly email shreyansh.padarha@outlook.com to request acess to the above links by providing viable reasoning.
+
 ---
 
 > ## Notebooks
